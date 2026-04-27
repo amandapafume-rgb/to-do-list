@@ -1,11 +1,30 @@
 function adicionar() {
-  let input = document.getElementById("tarefa");
-  let lista = document.getElementById("lista");
+  const input = document.getElementById("tarefa");
+  const texto = input.value;
 
-  let novaTarefa = document.createElement("li");
-  novaTarefa.textContent = input.value;
+  if (texto === "") return;
 
-  lista.appendChild(novaTarefa);
+  const li = document.createElement("li");
+
+  const span = document.createElement("span");
+  span.innerText = texto;
+
+  // clicar para riscar
+  span.onclick = function () {
+    span.classList.toggle("concluida");
+  };
+
+  // botão excluir
+  const botao = document.createElement("button");
+  botao.innerText = " ❌";
+  botao.onclick = function () {
+    li.remove();
+  };
+
+  li.appendChild(span);
+  li.appendChild(botao);
+
+  document.getElementById("lista").appendChild(li);
 
   input.value = "";
 }
